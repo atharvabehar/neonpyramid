@@ -3,6 +3,7 @@ const World= Matter.World;
 const Bodies = Matter.Bodies;
 
 const Constraint = Matter.Constraint;
+var Score = 0
 var engine, world;
 
 
@@ -37,11 +38,14 @@ function setup() {
 
 function draw() {
   background( backgroundImg);
+  noStroke();
+   textSize(35);
+   fill("white");
+   text("score:"+Score,width-300,50);
   Engine.update(engine);
- 
+  ground.display();
   b1.display();
   b2.display();
-  ground.display();
   b3.display();
   b4.display();
   b5.display();
@@ -58,7 +62,23 @@ function draw() {
   b16.display(); 
   slingShot.display();
   hexagon.display();
- 
+  
+  b1.score();
+  b2.score();
+  b3.score();
+  b4.score();
+  b5.score();
+  b6.score();
+  b7.score();
+  b8.score();
+  b9.score();
+  b10.score();
+  b11.score();
+  b12.score();
+  b13.score();
+  b14.score();
+  b15.score();
+  b16.score(); 
 }
 function mouseDragged(){
   Matter.Body.setPosition(hexagon.body, {x: mouseX , y: mouseY});
@@ -68,3 +88,25 @@ function mouseDragged(){
 function mouseReleased(){
   slingShot.fly();
 }
+function  keyPressed(){
+  if (keyCode == 32){
+      slingShot.attach(hexagon.body);
+    
+  }
+}
+async function getbackgroundImg(){
+  var respons = await fetch("http://worldtimeapi.org/api/timezone/europe/london") ;
+  var responsjson = await respons.json()
+  var dt = responsjson.datetime;
+  
+  var r  = dt.slice(11,13);
+  
+  if (r>= 06&&r<=19){
+      bg = "sprites/bg.png";
+  }else {
+      bg = "sprites/bg2.jpg";
+  }
+  backgroundImg = loadImage(bg)
+  }
+      
+  
