@@ -5,7 +5,12 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var Score = 0
 var engine, world;
+var  backgroundImg,bg;
 
+function preload() {
+  getbackgroundImg();
+
+}
 
 function setup() {
   var canvas = createCanvas(1200,600);
@@ -13,7 +18,7 @@ function setup() {
     world = engine.world;
  //64 33 93
   //createSprite(400, 200, 50, 50);
-  backgroundImg = loadImage("bg.jpg");
+//  backgroundImg = loadImage(bg);
     b1 = new Box(450,390,50,40)
     b2 = new Box(500,390,50,40);
     b3 = new Box(550,390,50,40);
@@ -34,10 +39,13 @@ function setup() {
     hexagon = new Haxagon(250,200);
     slingShot = new SlingShot(hexagon.body,{x:200,y:200})
     ground = new Ground(600,400,500,20);
-}
+    
+  
+  }
 
 function draw() {
-  background( backgroundImg);
+      background(backgroundImg);
+
   noStroke();
    textSize(35);
    fill("white");
@@ -95,18 +103,19 @@ function  keyPressed(){
   }
 }
 async function getbackgroundImg(){
-  var respons = await fetch("http://worldtimeapi.org/api/timezone/europe/london") ;
+  var respons = await fetch("http://worldtimeapi.org/api/timezone/asia/kolkata") ;
   var responsjson = await respons.json()
   var dt = responsjson.datetime;
   
   var r  = dt.slice(11,13);
   
   if (r>= 06&&r<=19){
-      bg = "sprites/bg.png";
+      bg = "bg.jpg";
   }else {
-      bg = "sprites/bg2.jpg";
+      bg = "bg2.jpg";
   }
   backgroundImg = loadImage(bg)
   }
+  
       
   
